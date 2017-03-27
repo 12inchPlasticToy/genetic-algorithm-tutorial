@@ -1,28 +1,30 @@
 #include "FitnessCalc.h"
 #include <memory>
+#include <iostream>
+#include <string>
+#include <iterator>
 
-std::vector<char> FitnessCalc::solution{64};
+std::bitset<64> FitnessCalc::solution;
 
-void FitnessCalc::setSolution(std::vector<char> _solution){
-	solution = _solution;
-}
 
 // To make it easier we can use this method to set our candidate solution 
 // with string of 0s and 1s
 void FitnessCalc::setSolution(std::string newSolution){
-	solution = std::vector<char>(newSolution.size());
-
+//	solution = std::vector<char>(newSolution.size());
+//	std::copy(newSolution.begin(), newSolution.end(), std::back_inserter(solution));
+	
 	// Loop through each character of our string and save it in our byte 
 	// array
-	for (auto i = 0; i < newSolution.size(); ++i){
-		auto character = newSolution.substr(i, i + 1);
-		if (character == "0" || character == "1"){
-			solution[i] = *character.c_str();
+	int bit{0};
+	for(char c : newSolution){
+		bit = 0;
+		if(c == '1'){
+			bit = 1;
 		}
-		else{
-			solution[i] = 0;
-		}
+		solution <<= 1;
+		solution |= bit;
 	}
+	std::cout << "Solution: " << solution << std::endl;
 }
 
 // Calculate inidividuals fittness by comparing it to our candidate solution

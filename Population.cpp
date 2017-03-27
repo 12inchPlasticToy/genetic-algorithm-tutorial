@@ -15,7 +15,7 @@ Population::Population(int populationSize, bool initialise){
 Population::~Population(){}
 
 Individual Population::getIndividual(int index) const{
-	return individuals.at(index);
+	return individuals[index];
 }
 
 Individual Population::getFittest() const{

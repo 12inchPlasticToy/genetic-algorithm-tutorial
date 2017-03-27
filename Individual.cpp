@@ -9,28 +9,24 @@
 
 
 Individual::Individual(){
-	genes.resize(defaultGeneLength);
 }
 
 Individual::~Individual(){}
 
 void Individual::generateIndividual(){
-	srand(time(0));
-	for (auto i = 0; i < size(); ++i){
-		auto gene = static_cast<char>(rand() % 2);
-		genes[i] = gene;
-	}
+	for (auto i = 0; i < size(); ++i)
+		genes[i] = rand() % 2;
 }
 
 void Individual::setDefaultGeneLength(int length){
 	defaultGeneLength = length;
 }
 
-char Individual::getGene(int index) const{
+bool Individual::getGene(int index) const{
 	return genes[index];
 }
 
-void Individual::setGene(int index, char value){
+void Individual::setGene(int index, bool value){
 	genes[index] = value;
 	fitness = 0;
 }
@@ -47,13 +43,10 @@ int Individual::getFitness(){
 }
 
 std::ostream& operator <<(std::ostream& os, const Individual& indiv){
-//	std::string geneString{""};
-	os << "";
-	for (int i = 0; i < indiv.size(); i++ ){
-//		geneString += indiv.getGene(i);
-		os << indiv.getGene(i);
+	//	std::string geneString{""};
+	//	os << "";
+		//		geneString += indiv.getGene(i);
+	os << indiv.genes;
 
-	}
 	return os;
 };
-

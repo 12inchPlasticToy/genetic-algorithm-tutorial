@@ -1,11 +1,11 @@
 #pragma once
 #include "Individual.h"
+#include <bitset>
 
 class FitnessCalc{
 public:
-	static std::vector<char> solution;
+	static std::bitset<64> solution;
 	
-	static void setSolution(std::vector<char> _solution);
 	static void setSolution(std::string newSolution);
 
 	static int getFitness(Individual* individual);

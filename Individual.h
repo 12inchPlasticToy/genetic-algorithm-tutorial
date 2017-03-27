@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
 #include <ostream>
+#include <bitset>
 
 class Individual{
 
@@ -11,15 +11,15 @@ public:
 
 	void generateIndividual();
 	void setDefaultGeneLength(int length);
-	char getGene(int index) const;
-	void setGene(int index, char value);
+	bool getGene(int index) const;
+	void setGene(int index, bool value);
 	int size() const;
 	int getFitness();
 
 	friend std::ostream& operator <<(std::ostream& os, const Individual& indiv);
 	
 private:
-	std::vector<char> genes;
+	std::bitset<64> genes;
 	int fitness{0};
 };
 

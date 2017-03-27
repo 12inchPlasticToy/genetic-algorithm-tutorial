@@ -1,8 +1,9 @@
 #include "Algorithm.h"
+#include <iostream>
 
 
 const double Algorithm::uniformRate = 0.5;
-const double Algorithm::mutationRate = 0.015;
+const double Algorithm::mutationRate = 0.015; // 0.015
 const int Algorithm::tournamentSize = 5;
 const bool Algorithm::elitism = true;
 
@@ -41,22 +42,23 @@ Individual Algorithm::crossover(Individual indiv1, Individual indiv2){
 	// Loop through genes
 	for (int i = 0; i < indiv1.size(); ++i)
 	// Crossover
-		if (static_cast<double>(rand()) / RAND_MAX <= uniformRate)
-			newSol.setGene(i, indiv1.getGene(i));
+		if ((static_cast<double>(rand()) / RAND_MAX) <= uniformRate)
+			newSol.setGene(i, indiv1.getGene(i) == 1);
 		else
-			newSol.setGene(i, indiv2.getGene(i));
+			newSol.setGene(i, indiv2.getGene(i) == 1);
 
 	return newSol;
 }
 
 void Algorithm::mutate(Individual indiv){
 	//	loop through genes 
-	for (int i = 0; i < indiv.size(); i++)
+	for (int i = 0; i < indiv.size(); i++){
 		if (static_cast<double>(rand()) / RAND_MAX <= mutationRate){
 			//		create new gene
-			char gene = static_cast<char>(rand() % 2);
-			indiv.setGene(i, gene);
+			//			char gene = rand() % 2 == 0 ? '0' : '1';
+			indiv.setGene(i, rand() % 2 == 0);
 		}
+	}
 }
 
 Individual Algorithm::tournamentSelection(Population pop){
